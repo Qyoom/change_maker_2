@@ -39,7 +39,8 @@ function processPayment(e) {
 	});
 	
 	console.log("changeDue: " + changeDue + " | changeInDenoms: " + changeInDenoms + " | changeBalRemain < 0.01 ? " + (changeBalRemain < 0.01) + " | changeAccume: " + changeAccume);
-	$('#change').text(stringifyChange(changeInDenoms));
+	$('#changeInDenom').text(stringifyChange(changeInDenoms));
+	$('#chgDue').text("Change due: " + changeDue).show();
 }
 
 function moneyFormat(str) {
@@ -61,4 +62,6 @@ function clearFields(e) {
 	e.preventDefault();
 	$("#cost").val('');
 	$("#payment").val('');
+	$('#changeInDenom').text('');
+	$("#chgDue").text('');
 }

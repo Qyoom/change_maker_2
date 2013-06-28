@@ -68,11 +68,14 @@
                 <input id="payment" type="text" placeholder="amount"/>
             </li>
             <li>
+                <p><span id="chgDue"></span></p>
+            </li>
+            <li>
                 <button onclick="processPayment(event)">Submit</button>
                 <button onclick="clearFields(event)">Clear</button>
             </li>
             <li>
-            	<p id="change"></p>
+            	<p id="changeInDenom"></p>
                 <p id="error"></p>
             </li>
         </ul>
