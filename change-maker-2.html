@@ -1,62 +1,16 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Change Maker</title>
+	<title>Change Maker</title>
 
-<style>
-	form {
-		float:left;	
-		border-style:solid;
-		border-width:thin;
-		margin:10px;
-		padding:1em;
-	}
-	form#drawer ul li input {
-		width:32px;
-	}
-	form#transaction ul li input {
-		width:50px;
-	}
-	ul {
-		list-style-type: none;
-		padding:0;
-	}
-	ul li label span {
-		width:90px;
-		float:left;
-	}
-	h3 {
-		margin-top:-6px;
-		margin-bottom:-3px;
-	}
-</style>
-
-<script>
-	window.onload = function () {
-		console.log("DOM loaded");
-	}
-	
-	function processPayment(e) {
-		e.preventDefault();
-		console.log("processPayment TOP");
-		
-		var cost = document.getElementById("cost");
-		cost = parseFloat(cost.value);
-		console.log("cost: " + cost);
-		
-		var payment = document.getElementById("payment");
-		payment = parseFloat(payment.value);
-		console.log("payment: " + payment);
-	}
-	
-	function clearFields(e) {
-		e.preventDefault();
-		console.log("clearFields TOP");
-		document.getElementById("cost").value='';
-		document.getElementById("payment").value='';
-	}
-</script>
-
+	<!-- This application's custom CSS -->
+	<link rel="stylesheet" type="text/css" href="styles/change-maker-2.css">
+    
+    <!-- jQuery -->
+	<script type="text/javascript" src="scripts/jquery-1.8.2.min.js"></script>
+    
+    <!-- This application's custom JS -->
+    <script type="text/javascript" src="scripts/change-maker-2.js"></script>
 </head>
 
 <body>

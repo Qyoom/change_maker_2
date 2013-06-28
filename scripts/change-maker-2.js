@@ -1,20 +1,17 @@
-window.onload = function () {
+$(document).ready(function () {
 	console.log("DOM loaded");
-}
+});
 	
 function processPayment(e) {
 	e.preventDefault();
 	console.log("processPayment TOP");
 	
-	var cost = document.getElementById("cost");
-	cost = parseFloat(cost.value);
-	
-	var payment = document.getElementById("payment");
-	payment = parseFloat(payment.value);
+	var cost = parseFloat($("#cost").val());
+	var payment = parseFloat($("#payment").val());
 }
 
 function clearFields(e) {
 	e.preventDefault();
-	document.getElementById("cost").value='';
-	document.getElementById("payment").value='';
+	$("#cost").val('');
+	$("#payment").val('');
 }
