@@ -11,9 +11,11 @@ function processPayment(e) {
 	var payment = moneyFormat($("#payment").val());
 	console.log("payment: " + payment);
 	var changeDue = (payment >= cost) ? (Math.round((payment - cost)*100)/100) : 0.00;
+	var changeBalRemain = changeDue;
 	console.log("changeDue: " + changeDue);
 	
 	var changeInDenoms = [];
+	var changeAccume = 0.0;
 	
 	$('#drawer input').each(function(index) {
 		var id = $(this).attr("id");
@@ -21,21 +23,22 @@ function processPayment(e) {
 		var denomVal = moneyFormat($(this).attr("data-denom"));
 		
 		console.log("index " + index + " id: " + id + " | denomQty: " + denomQty + " | denomVal: " + denomVal);
-		console.log("denomVal < changeDue ? " + (denomVal < changeDue));
-		console.log("changeDue / denomVal : " + (changeDue / denomVal));
-		console.log(Math.floor(changeDue / denomVal));
+		console.log("denomVal < changeBalRemain ? " + (denomVal < changeBalRemain));
+		console.log("changeBalRemain / denomVal : " + (changeBalRemain / denomVal));
+		console.log(Math.floor(changeBalRemain / denomVal));
 		console.log("------------------------------------------");
 		
-		var denomFactor = (Math.floor(changeDue / denomVal));
+		var denomFactor = (Math.floor(changeBalRemain / denomVal));
 		if(denomFactor > 0 && denomQty > 0) {
 			denomFactor = (denomFactor <= denomQty) ? denomFactor : denomQty;
-			changeDue = changeDue - (denomVal * denomFactor);
-			console.log("this subtraction: " + (denomVal * denomFactor) + " | changeDue: " + changeDue);
+			changeBalRemain = changeBalRemain - (denomVal * denomFactor);
+			console.log("this subtraction: " + (denomVal * denomFactor) + " | changeBalRemain: " + changeBalRemain);
 			changeInDenoms.push([id, denomFactor]);
+			changeAccume = changeAccume + (denomFactor * denomVal);
 		}
 	});
 	
-	console.log("changeInDenoms: " + changeInDenoms + " | changeDue < 0.01 ? " + (changeDue < 0.01));
+	console.log("changeDue: " + changeDue + " | changeInDenoms: " + changeInDenoms + " | changeBalRemain < 0.01 ? " + (changeBalRemain < 0.01) + " | changeAccume: " + changeAccume);
 	$('#change').text(stringifyChange(changeInDenoms));
 }
 
