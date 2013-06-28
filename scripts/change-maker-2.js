@@ -8,6 +8,13 @@ function processPayment(e) {
 	
 	var cost = parseFloat($("#cost").val());
 	var payment = parseFloat($("#payment").val());
+	
+	$('#drawer input').each(function(index) {
+		var id = $(this).attr("id");
+		var val = $(this).val();
+		var denom = $(this).attr("data-denom");
+		console.log("index " + index + " id: " + id + " | val: " + val + " | denom: " + denom);
+	});
 }
 
 function clearFields(e) {
