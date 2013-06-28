@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Change Maker</title>
+
+<style>
+	ul {
+		list-style-type: none;
+		padding:0;
+	}
+	ul li input {
+		width:32px;
+	}
+	ul li label span {
+		width:90px;
+		float:left;
+	}
+</style>
+
+<script>
+	window.onload = function () {
+		console.log("DOM loaded");
+	}
+	
+	function processPayment(e) {
+		e.preventDefault();
+		console.log("processPayment TOP");
+		
+		var cost = document.getElementById("cost");
+		cost = parseFloat(cost.value);
+		console.log("cost: " + cost);
+		
+		var payment = document.getElementById("payment");
+		payment = parseFloat(payment.value);
+		console.log("payment: " + payment);
+	}
+	
+	function clearFields(e) {
+		e.preventDefault();
+		console.log("clearFields TOP");
+		document.getElementById("cost").value='';
+		document.getElementById("payment").value='';
+	}
+</script>
+
+</head>
+
+<body>
+    <ul>
+        <li>
+            <label for="twenties"><span>Twenties</span></label>
+            <input id="twenties" type="number" min="0" placeholder="qty"/>
+        </li>
+        <li>
+            <label for="tens"><span>Tens</span></label>
+            <input id="tens" type="number" min="0" placeholder="qty"/>
+        </li>
+        <li>
+            <label for=""><span></span></label>
+            <input id="" type="number" min="0" placeholder="qty"/>
+        </li>
+    </ul>
+
+	<form>
+    	<legend>Cash Purchase Transaction</legend>
+            <label for="cost">Cost (dollars.cents)</label>
+            <input id="cost" type="text" placeholder="cost" />
+            <label for="payment">Payment (dollars.cents)</label>
+            <input id="payment" type="text" placeholder="payment amount"/>
+            <input type="submit" value="Submit" onclick="processPayment(event)" />
+            <input type="submit" value="Clear" onclick="clearFields(event)" />
+        </legend>
+    </form>
+    
+    <p id="change">Change: </p>
+</body>
+</html>
