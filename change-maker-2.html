@@ -4,16 +4,30 @@
 <title>Change Maker</title>
 
 <style>
+	form {
+		float:left;	
+		border-style:solid;
+		border-width:thin;
+		margin:10px;
+		padding:1em;
+	}
+	form#drawer ul li input {
+		width:32px;
+	}
+	form#transaction ul li input {
+		width:50px;
+	}
 	ul {
 		list-style-type: none;
 		padding:0;
 	}
-	ul li input {
-		width:32px;
-	}
 	ul li label span {
 		width:90px;
 		float:left;
+	}
+	h3 {
+		margin-top:-6px;
+		margin-bottom:-3px;
 	}
 </style>
 
@@ -46,7 +60,7 @@
 </head>
 
 <body>
-	<form>
+	<form id="drawer">
     	<h3>Store Cash Drawer</h3>
         <ul>
             <li>
@@ -64,22 +78,25 @@
         </ul>
     </form>
 
-	<form>
+	<form id="transaction">
     	<h3>Cash Purchase Transaction</h3>
         <ul>
         	<li>
-                <label for="cost">Cost (dollars.cents)</label>
-                <input id="cost" type="text" placeholder="cost" />
+                <label for="cost"><span>Cost</span></label>
+                <input id="cost" type="text" placeholder="amount" />
             </li>
-                <label for="payment">Payment (dollars.cents)</label>
-                <input id="payment" type="text" placeholder="payment amount"/>
+            <li>
+                <label for="payment"><span>Payment</span></label>
+                <input id="payment" type="text" placeholder="amount"/>
+            </li>
             <li>
                 <button onclick="processPayment(event)">Submit</button>
                 <button onclick="clearFields(event)">Clear</button>
             </li>
+            <li>
+            	<p id="change">Change Returned: </p>
+            </li>
         </ul>
     </form>
-    
-    <p id="change">Change: </p>
 </body>
 </html>
