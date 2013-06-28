@@ -46,30 +46,38 @@
 </head>
 
 <body>
-    <ul>
-        <li>
-            <label for="twenties"><span>Twenties</span></label>
-            <input id="twenties" type="number" min="0" placeholder="qty"/>
-        </li>
-        <li>
-            <label for="tens"><span>Tens</span></label>
-            <input id="tens" type="number" min="0" placeholder="qty"/>
-        </li>
-        <li>
-            <label for=""><span></span></label>
-            <input id="" type="number" min="0" placeholder="qty"/>
-        </li>
-    </ul>
+	<form>
+    	<h3>Store Cash Drawer</h3>
+        <ul>
+            <li>
+                <label for="twenties"><span>Twenties</span></label>
+                <input id="twenties" type="number" min="0" placeholder="qty"/>
+            </li>
+            <li>
+                <label for="tens"><span>Tens</span></label>
+                <input id="tens" type="number" min="0" placeholder="qty"/>
+            </li>
+            <li>
+                <label for=""><span></span></label>
+                <input id="" type="number" min="0" placeholder="qty"/>
+            </li>
+        </ul>
+    </form>
 
 	<form>
-    	<legend>Cash Purchase Transaction</legend>
-            <label for="cost">Cost (dollars.cents)</label>
-            <input id="cost" type="text" placeholder="cost" />
-            <label for="payment">Payment (dollars.cents)</label>
-            <input id="payment" type="text" placeholder="payment amount"/>
-            <input type="submit" value="Submit" onclick="processPayment(event)" />
-            <input type="submit" value="Clear" onclick="clearFields(event)" />
-        </legend>
+    	<h3>Cash Purchase Transaction</h3>
+        <ul>
+        	<li>
+                <label for="cost">Cost (dollars.cents)</label>
+                <input id="cost" type="text" placeholder="cost" />
+            </li>
+                <label for="payment">Payment (dollars.cents)</label>
+                <input id="payment" type="text" placeholder="payment amount"/>
+            <li>
+                <button onclick="processPayment(event)">Submit</button>
+                <button onclick="clearFields(event)">Clear</button>
+            </li>
+        </ul>
     </form>
     
     <p id="change">Change: </p>
