@@ -10,8 +10,8 @@ function processPayment(e) {
 	console.log("cost: " + cost);
 	var payment = moneyFormat($("#payment").val());
 	console.log("payment: " + payment);
-	var changeAmt = (payment >= cost) ? (Math.round((payment - cost)*100)/100) : 0.00;
-	console.log("changeAmt: " + changeAmt);
+	var changeDue = (payment >= cost) ? (Math.round((payment - cost)*100)/100) : 0.00;
+	console.log("changeDue: " + changeDue);
 	
 	var change = [];
 	
@@ -21,21 +21,21 @@ function processPayment(e) {
 		var denomVal = moneyFormat($(this).attr("data-denom"));
 		
 		console.log("index " + index + " id: " + id + " | denomQty: " + denomQty + " | denomVal: " + denomVal);
-		console.log("denomVal < changeAmt ? " + (denomVal < changeAmt));
-		console.log("changeAmt / denomVal : " + (changeAmt / denomVal));
-		console.log(Math.floor(changeAmt / denomVal));
+		console.log("denomVal < changeDue ? " + (denomVal < changeDue));
+		console.log("changeDue / denomVal : " + (changeDue / denomVal));
+		console.log(Math.floor(changeDue / denomVal));
 		console.log("------------------------------------------");
 		
-		var denomFactor = (Math.floor(changeAmt / denomVal));
+		var denomFactor = (Math.floor(changeDue / denomVal));
 		if(denomFactor > 0 && denomQty > 0) {
 			denomFactor = (denomFactor <= denomQty) ? denomFactor : denomQty;
-			changeAmt = changeAmt - (denomVal * denomFactor);
-			console.log("this subtraction: " + (denomVal * denomFactor) + " | changeAmt: " + changeAmt);
+			changeDue = changeDue - (denomVal * denomFactor);
+			console.log("this subtraction: " + (denomVal * denomFactor) + " | changeDue: " + changeDue);
 			change.push([id, denomFactor]);
 		}
 	});
 	
-	console.log("change: " + change + " | changeAmt < 0.01 ? " + (changeAmt < 0.01));
+	console.log("change: " + change + " | changeDue < 0.01 ? " + (changeDue < 0.01));
 	$('#change').text(stringifyChange(change));
 }
 
