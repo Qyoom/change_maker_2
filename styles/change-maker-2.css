@@ -1,0 +1,25 @@
+form {
+		float:left;	
+		border-style:solid;
+		border-width:thin;
+		margin:10px;
+		padding:1em;
+}
+form#drawer ul li input {
+	width:36px;
+}
+form#transaction ul li input {
+	width:50px;
+}
+ul {
+	list-style-type: none;
+	padding:0;
+}
+ul li label span {
+	width:90px;
+	float:left;
+}
+h3 {
+	margin-top:-6px;
+	margin-bottom:-3px;
+}
