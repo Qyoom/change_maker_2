@@ -13,7 +13,7 @@ function processPayment(e) {
 	var changeDue = (payment >= cost) ? (Math.round((payment - cost)*100)/100) : 0.00;
 	console.log("changeDue: " + changeDue);
 	
-	var change = [];
+	var changeInDenoms = [];
 	
 	$('#drawer input').each(function(index) {
 		var id = $(this).attr("id");
@@ -31,12 +31,12 @@ function processPayment(e) {
 			denomFactor = (denomFactor <= denomQty) ? denomFactor : denomQty;
 			changeDue = changeDue - (denomVal * denomFactor);
 			console.log("this subtraction: " + (denomVal * denomFactor) + " | changeDue: " + changeDue);
-			change.push([id, denomFactor]);
+			changeInDenoms.push([id, denomFactor]);
 		}
 	});
 	
-	console.log("change: " + change + " | changeDue < 0.01 ? " + (changeDue < 0.01));
-	$('#change').text(stringifyChange(change));
+	console.log("changeInDenoms: " + changeInDenoms + " | changeDue < 0.01 ? " + (changeDue < 0.01));
+	$('#change').text(stringifyChange(changeInDenoms));
 }
 
 function moneyFormat(str) {
