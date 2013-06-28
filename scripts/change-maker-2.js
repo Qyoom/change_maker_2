@@ -49,7 +49,7 @@ function stringifyChange(change) {
 	var denom = 0, qty = 1;
 	for(var i = 0; i < change.length; i++) {
 		result = result.concat("" + change[i][denom], ": ", "" + change[i][qty]);
-		if(i < change.length) result = result.concat(", ");
+		if(i < change.length - 1) result = result.concat(", ");
 	}
 	return result;
 }
