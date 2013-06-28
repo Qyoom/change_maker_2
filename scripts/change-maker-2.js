@@ -41,6 +41,9 @@ function processPayment(e) {
 	console.log("changeDue: " + changeDue + " | changeInDenoms: " + changeInDenoms + " | changeBalRemain < 0.01 ? " + (changeBalRemain < 0.01) + " | changeAccume: " + changeAccume);
 	$('#changeInDenom').text(stringifyChange(changeInDenoms));
 	$('#chgDue').text("Change due: " + changeDue).show();
+	if(changeBalRemain > 0.01) {
+		$('#error').text("Unable to process transaction--Not enough change");
+	}
 }
 
 function moneyFormat(str) {
@@ -64,4 +67,5 @@ function clearFields(e) {
 	$("#payment").val('');
 	$('#changeInDenom').text('');
 	$("#chgDue").text('');
+	$('#error').text('');
 }
