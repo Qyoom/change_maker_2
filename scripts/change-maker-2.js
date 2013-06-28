@@ -6,19 +6,31 @@ function processPayment(e) {
 	e.preventDefault();
 	console.log("processPayment TOP");
 	
-	var cost = parseFloat($("#cost").val());
+	var cost = moneyFormat($("#cost").val());
 	console.log("cost: " + cost);
-	var payment = parseFloat($("#payment").val());
+	var payment = moneyFormat($("#payment").val());
 	console.log("payment: " + payment);
-	var changeAmt = (payment >= cost) ? (payment - cost).toFixed(2) : 0.0;
+	var changeAmt = (payment >= cost) ? (Math.round((payment - cost)*100)/100) : 0.00;
 	console.log("changeAmt: " + changeAmt);
+	
+	var change = {};
 	
 	$('#drawer input').each(function(index) {
 		var id = $(this).attr("id");
-		var val = $(this).val();
-		var denom = $(this).attr("data-denom");
-		console.log("index " + index + " id: " + id + " | val: " + val + " | denom: " + denom);
+		var denomQty = parseInt($(this).val());
+		var denomVal = moneyFormat($(this).attr("data-denom"));
+		
+		console.log("index " + index + " id: " + id + " | denomQty: " + denomQty + " | denomVal: " + denomVal);
+		console.log("denomVal < changeAmt ? " + (denomVal < changeAmt));
+		console.log("changeAmt / denomVal : " + (changeAmt / denomVal));
+		console.log(Math.floor(changeAmt / denomVal));
+		console.log("------------------------------------------");
 	});
+}
+
+function moneyFormat(str) {
+	var result = Math.round(parseFloat(str) * 100) / 100;
+	return result;
 }
 
 function clearFields(e) {
