@@ -28,18 +28,29 @@ function processPayment(e) {
 		
 		var denomFactor = (Math.floor(changeAmt / denomVal));
 		if(denomFactor > 0 && denomQty > 0) {
-			change.push([id, denomFactor]);
 			denomFactor = (denomFactor <= denomQty) ? denomFactor : denomQty;
 			changeAmt = changeAmt - (denomVal * denomFactor);
 			console.log("this subtraction: " + (denomVal * denomFactor) + " | changeAmt: " + changeAmt);
+			change.push([id, denomFactor]);
 		}
 	});
 	
 	console.log("change: " + change + " | changeAmt < 0.01 ? " + (changeAmt < 0.01));
+	$('#change').text(stringifyChange(change));
 }
 
 function moneyFormat(str) {
 	var result = Math.round(parseFloat(str) * 100) / 100;
+	return result;
+}
+
+function stringifyChange(change) {
+	var result = "Change returned: ";
+	var denom = 0, qty = 1;
+	for(var i = 0; i < change.length; i++) {
+		result = result.concat("" + change[i][denom], ": ", "" + change[i][qty]);
+		if(i < change.length) result = result.concat(", ");
+	}
 	return result;
 }
 
