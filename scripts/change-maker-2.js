@@ -27,14 +27,15 @@ function processPayment(e) {
 		console.log("------------------------------------------");
 		
 		var denomFactor = (Math.floor(changeAmt / denomVal));
-		if(denomFactor > 0) {
+		if(denomFactor > 0 && denomQty > 0) {
 			change.push([id, denomFactor]);
+			denomFactor = (denomFactor <= denomQty) ? denomFactor : denomQty;
 			changeAmt = changeAmt - (denomVal * denomFactor);
 			console.log("this subtraction: " + (denomVal * denomFactor) + " | changeAmt: " + changeAmt);
 		}
 	});
 	
-	console.log("change: " + change);
+	console.log("change: " + change + " | changeAmt < 0.01 ? " + (changeAmt < 0.01));
 }
 
 function moneyFormat(str) {
