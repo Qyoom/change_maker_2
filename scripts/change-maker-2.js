@@ -13,7 +13,7 @@ function processPayment(e) {
 	var changeAmt = (payment >= cost) ? (Math.round((payment - cost)*100)/100) : 0.00;
 	console.log("changeAmt: " + changeAmt);
 	
-	var change = {};
+	var change = [];
 	
 	$('#drawer input').each(function(index) {
 		var id = $(this).attr("id");
@@ -25,7 +25,16 @@ function processPayment(e) {
 		console.log("changeAmt / denomVal : " + (changeAmt / denomVal));
 		console.log(Math.floor(changeAmt / denomVal));
 		console.log("------------------------------------------");
+		
+		var denomFactor = (Math.floor(changeAmt / denomVal));
+		if(denomFactor > 0) {
+			change.push([id, denomFactor]);
+			changeAmt = changeAmt - (denomVal * denomFactor);
+			console.log("this subtraction: " + (denomVal * denomFactor) + " | changeAmt: " + changeAmt);
+		}
 	});
+	
+	console.log("change: " + change);
 }
 
 function moneyFormat(str) {
