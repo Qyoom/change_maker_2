@@ -7,7 +7,11 @@ function processPayment(e) {
 	console.log("processPayment TOP");
 	
 	var cost = parseFloat($("#cost").val());
+	console.log("cost: " + cost);
 	var payment = parseFloat($("#payment").val());
+	console.log("payment: " + payment);
+	var changeAmt = (payment >= cost) ? (payment - cost).toFixed(2) : 0.0;
+	console.log("changeAmt: " + changeAmt);
 	
 	$('#drawer input').each(function(index) {
 		var id = $(this).attr("id");
