@@ -61,20 +61,18 @@
         <ul>
         	<li>
                 <label for="cost"><span>Cost</span></label>
-                <input id="cost" type="text" placeholder="amount" />
+                <input id="cost" type="text" placeholder="$0.00" />
             </li>
             <li>
                 <label for="payment"><span>Payment</span></label>
-                <input id="payment" type="text" placeholder="amount"/>
+                <input id="payment" type="text" placeholder="$0.00"/>
             </li>
-            <li>
-                <p><span id="chgDue"></span></p>
-            </li>
-            <li>
+            <li id="buttons">
                 <button onclick="processPayment(event)">Submit</button>
                 <button onclick="clearFields(event)">Clear</button>
             </li>
             <li>
+            	<p><span id="chgDue"></span></p>
             	<p id="changeInDenom"></p>
                 <p id="error"></p>
             </li>
