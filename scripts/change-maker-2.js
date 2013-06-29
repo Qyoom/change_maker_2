@@ -7,62 +7,61 @@ function processPayment(e) {
 	console.log("processPayment TOP");
 	
 	var cost = moneyFormat($("#cost").val());
-	console.log("cost: " + cost);
 	var payment = moneyFormat($("#payment").val());
-	console.log("payment: " + payment);
-	var changeDue = (payment >= cost) ? (Math.round((payment - cost)*100)/100) : 0.00;
+	var changeDue = (payment >= cost) ? (Math.round((payment - cost)*100)/100) : 0.00; /* Round float math to two decimal places */
+	// Accumulators	
 	var changeBalRemain = changeDue;
-	console.log("changeDue: " + changeDue);
-	
 	var changeInDenoms = [];
 	var changeAccume = 0.0;
 	
+	// Iterate over denominations in change drawer
 	$('#drawer input').each(function(index) {
-		var id = $(this).attr("id");
+		var id = $(this).attr("id"); // id <- denomination name
 		var denomQty = parseInt($(this).val());
 		var denomVal = moneyFormat($(this).attr("data-denom"));
-		
-		console.log("index " + index + " id: " + id + " | denomQty: " + denomQty + " | denomVal: " + denomVal);
-		console.log("denomVal < changeBalRemain ? " + (denomVal < changeBalRemain));
-		console.log("changeBalRemain / denomVal : " + (changeBalRemain / denomVal));
-		console.log(Math.floor(changeBalRemain / denomVal));
-		console.log("------------------------------------------");
-		
 		var denomFactor = (Math.floor(changeBalRemain / denomVal));
+		
+		// Factor and accumulate quantities and amounts - basic idea: denomination quantity * denomination value
 		if(denomFactor > 0 && denomQty > 0) {
 			denomFactor = (denomFactor <= denomQty) ? denomFactor : denomQty;
 			changeBalRemain = changeBalRemain - (denomVal * denomFactor);
-			console.log("this subtraction: " + (denomVal * denomFactor) + " | changeBalRemain: " + changeBalRemain);
+			// store results for this denomination
 			changeInDenoms.push([id, denomFactor]);
 			changeAccume = changeAccume + (denomFactor * denomVal);
 		}
 	});
 	
-	console.log("changeDue: " + changeDue + " | changeInDenoms: " + changeInDenoms + " | changeBalRemain < 0.01 ? " + (changeBalRemain < 0.01) + " | changeAccume: " + changeAccume);
+	// Message display
+	console.log("changeDue: " + changeDue + " | changeInDenoms: " + changeInDenoms + 
+		" | changeBalRemain < 0.01 ? " + (changeBalRemain < 0.01) + " | changeAccume: " + changeAccume);
 	$('#changeInDenom').text(stringifyChange(changeInDenoms));
 	$('#chgDue').text("Change due: " + changeDue).show();
 	if(changeBalRemain > 0.01) {
 		$('#error').text("Unable to process transaction--Not enough change");
 	}
+	else {
+		$('#error').text('');	
+	}
 }
 
+// Maintain two decimal place formatting for floats from strings
 function moneyFormat(str) {
 	var result = Math.round(parseFloat(str) * 100) / 100;
 	return result;
 }
 
+// Convert collected data to readable message
 function stringifyChange(change) {
 	var result = "Change returned: ";
 	var denom = 0, qty = 1;
 	for(var i = 0; i < change.length; i++) {
-		result = result.concat("" + change[i][denom], ": ", "" + change[i][qty]);
+		result = result.concat(change[i][denom], ": ", change[i][qty]);
 		if(i < change.length - 1) result = result.concat(", ");
 	}
 	return result;
 }
 
-function clearFields(e) {
-	e.preventDefault();
+function clearFields() {
 	$("#cost").val('');
 	$("#payment").val('');
 	$('#changeInDenom').text('');
