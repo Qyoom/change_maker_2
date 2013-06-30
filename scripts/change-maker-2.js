@@ -20,7 +20,7 @@ function processPayment(e) {
 	var changeInDenoms = [];
 	var changeAccume = 0.0;
 	
-	// Iterate over denominations in change drawer
+	// Iterate over denominations in change drawer. This code is decoupled from references to specific denominations.
 	$('#drawer input').each(function(index) {
 		var id = $(this).attr("id"); // id <- denomination name
 		var denomQty = parseInt($(this).val());
