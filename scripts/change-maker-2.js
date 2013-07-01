@@ -43,7 +43,7 @@ function processPayment(e) {
 	$('#changeInDenom').text(stringifyChange(changeInDenoms));
 	$('#chgDue').text("Change due: " + formatCurrencyPrint(changeDue));
 	if(changeBalRemain >= 0.01) {
-		$('#error').text("Unable to process transaction--Not enough change!");
+		$('#error').text("Unable to process transaction; store does not have enough change!");
 	}
 	else {
 		$('#error').text('');	
