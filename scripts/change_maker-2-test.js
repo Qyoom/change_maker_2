@@ -5,7 +5,6 @@ function setTest1() {
 
 function runTest1(li) {
 	$('button#submit').click();
-	console.log("runTest1 - li: " + li + " | chgDue: " + $('#chgDue').text());
 	assert($('#chgDue').text() == "Change due: 0.00", "change due should be 0.00.", li);
 	assert($('#changeInDenom').text() == '', "No cash should be returned.", li);
 	assert($('#error').text() == '', "No error message should be displayed.", li);
@@ -14,10 +13,22 @@ function runTest1(li) {
 function setTest2() {
 	console.log("setTest2");
 	clearInputs();
+	$('#ones').val("1");
+	$('#halfdollars').val("1");
+	$('#quarters').val("1");
+	$('#dimes').val("2");
+	$('#pennies').val("4");
+	$('#cost').val("3");
+	$('#payment').val("5");
 }
 
-function runTest2() {
+function runTest2(li) {
 	console.log("runTest2");
+	$('button#submit').click();
+	assert($('#chgDue').text() == "Change due: 2.00", "change due should be 2.00.", li);
+	assert($('#changeInDenom').text() == 'Change returned: ones: 1, halfdollars: 1, quarters: 1, dimes: 2, pennies: 4', "Change returned: ones: 1, halfdollars: 1, quarters: 1, dimes: 2, pennies: 4", li);
+	assert($('#error').text() == 'Unable to process transaction; store does not have enough change!', "Unable to process transaction...", li);
+	assert($('#cost').val() == '3.00' && $('#payment').val() == '5.00', "Cost and payment display two decimal places.", li);
 }
 
 function setTest3() {
@@ -25,8 +36,9 @@ function setTest3() {
 	clearInputs();
 }
 
-function runTest3() {
+function runTest3(li) {
 	console.log("runTest3");
+	$('button#submit').click();
 }
 
 function setTest4() {
@@ -34,25 +46,25 @@ function setTest4() {
 	clearInputs();
 }
 
-function runTest4() {
+function runTest4(li) {
 	console.log("runTest4");
+	$('button#submit').click();
 }
 
-function setTest5() {
-	console.log("setTest5");
-	clearInputs();
-}
-
-function runTest5() {
-	console.log("runTest5");
+function runAll() {
+	console.log("runAll");
+	setTest1();
+	runTest1();
+	setTest2();
+	runTest2();
+	setTest3();
+	runTest3();
+	setTest4();
+	runTest4();
 }
 
 function clearInputs() {
 	$('input').val('');
-}
-
-function runAll() {
-	console.log("runAll");	
 }
 
 function assert( outcome, description, output ) { 
