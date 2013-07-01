@@ -34,11 +34,22 @@ function runTest2(li) {
 function setTest3() {
 	console.log("setTest3");
 	clearInputs();
+	$('#ones').val("1");
+	$('#halfdollars').val("1");
+	$('#quarters').val("1");
+	$('#dimes').val("2");
+	$('#pennies').val("5");
+	$('#cost').val("3");
+	$('#payment').val("5");
 }
 
 function runTest3(li) {
 	console.log("runTest3");
 	$('button#submit').click();
+	assert($('#chgDue').text() == "Change due: 2.00", "change due should be 2.00.", li);
+	assert($('#changeInDenom').text() == 'Change returned: ones: 1, halfdollars: 1, quarters: 1, dimes: 2, pennies: 5', "Change returned: ones: 1, halfdollars: 1, quarters: 1, dimes: 2, pennies: 5", li);
+	assert($('#error').text() == '', "No error message", li);
+	assert($('#cost').val() == '3.00' && $('#payment').val() == '5.00', "Cost and payment display two decimal places.", li);
 }
 
 function setTest4() {

@@ -72,7 +72,7 @@
             </li>
             <li id="buttons">
                 <button id="submit" onclick="processPayment(event)">Submit</button>
-                <button id="clear" onclick="clearFields(event)">Clear</button>
+                <button id="clear" onclick="clearInputs(event)">Clear</button>
             </li>
             <li>
             	<p><span id="chgDue"></span></p>
@@ -101,8 +101,8 @@
                     <p></p>
                 </li>
                 <li>
-                    <p>Cash drawer has. Cost is. Payment is.</p>
-                    <p>Expect change due of. Expect change returned of. Expect error message of </p>
+                    <p>Set up: Cash drawer has one one dollar bill, one half dollar, one quarter, two dimes, and five pennies. The cost is 3 (no decimal places). The payment is 5 (no decimal places).</p>
+                    <p>Upon submit, expect change due of 2.00. Expect change returned of "ones: 1, halfdollars: 1, quarters: 1, dimes: 2, pennies: 5". Expect no error message." Expect that the cost and payment fields are filled out to two decimal places.</p>
                     <button id="set_3" onclick="setTest3()">Set up</button>
                     <button id="test_3" onclick="runTest3($(this).parent())">Test</button>
                 </li>
