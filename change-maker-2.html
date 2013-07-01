@@ -71,8 +71,8 @@
                 <input id="payment" type="text" placeholder="$0.00"/>
             </li>
             <li id="buttons">
-                <button onclick="processPayment(event)">Submit</button>
-                <button onclick="clearFields(event)">Clear</button>
+                <button id="submit" onclick="processPayment(event)">Submit</button>
+                <button id="clear" onclick="clearFields(event)">Clear</button>
             </li>
             <li>
             	<p><span id="chgDue"></span></p>
@@ -91,7 +91,7 @@
                     <p>Set up: Cash drawer is empty. Cost is empty. Payment is empty.</p>
                     <p>Upon submit, expect change due of 0.00. Expect no change returned. Expect no error message.</p>
                     <button id="set_1" onclick="setTest1()">Set up</button>
-                    <button id="test_1" onclick="runTest1()">Test</button>
+                    <button id="test_1" onclick="runTest1($(this).parent())">Test</button>
                 </li>
                 <li>
                     <p>Cash drawer has. Cost is. Payment is.</p>

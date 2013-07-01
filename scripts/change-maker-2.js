@@ -25,6 +25,7 @@ function processPayment(e) {
 		var id = $(this).attr("id"); // id <- denomination name
 		var denomQty = parseInt($(this).val());
 		var denomVal = formatCurrencyCalc($(this).attr("data-denom"));
+		changeBalRemain = roundCurrencyCalcNum(changeBalRemain);
 		var denomFactor = (Math.floor(changeBalRemain / denomVal));
 		
 		// Factor and accumulate quantities and amounts - basic idea: denomination factor * denomination value
@@ -54,6 +55,12 @@ function processPayment(e) {
 }
 
 // Maintain two decimal place formatting for floats from strings
+// Maintain two decimal places for float calc
+function roundCurrencyCalcNum(num) {
+	var result = Math.round(parseFloat(num) * 100) / 100;
+	return result;
+}
+
 function formatCurrencyCalc(str) {
 	var result = Math.round(parseFloat(str) * 100) / 100;
 	return result;
