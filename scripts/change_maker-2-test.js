@@ -55,27 +55,39 @@ function runTest3(li) {
 function setTest4() {
 	console.log("setTest4");
 	clearInputs();
+	$('#tens').val("1");
+	$('#ones').val("1");
+	$('#halfdollars').val("1");
+	$('#quarters').val("4");
+	$('#nickels').val("14");
+	$('#pennies').val("5");
+	$('#cost').val("17.36");
+	$('#payment').val("20.00");
 }
 
 function runTest4(li) {
 	console.log("runTest4");
 	$('button#submit').click();
+	assert($('#chgDue').text() == "Change due: 2.64", "change due should be 2.64.", li);
+	assert($('#changeInDenom').text() == 'Change returned: ones: 1, halfdollars: 1, quarters: 4, nickels: 2, pennies: 4', "Change returned: ones: 1, halfdollars: 1, quarters: 4, nickels: 2, pennies: 4", li);
+	assert($('#error').text() == '', "No error message", li);
 }
 
-function runAll() {
+function runAllTests() {
 	console.log("runAll");
 	setTest1();
-	runTest1();
+	runTest1($('#scroller').find('li')[0]);
 	setTest2();
-	runTest2();
+	runTest2($('#scroller').find('li')[1]);
 	setTest3();
-	runTest3();
+	runTest3($('#scroller').find('li')[2]);
 	setTest4();
-	runTest4();
+	runTest4($('#scroller').find('li')[3]);
 }
 
 function clearInputs() {
 	$('input').val('');
+	$('#error').text('')
 }
 
 function assert( outcome, description, output ) { 
